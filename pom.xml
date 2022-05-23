@@ -93,24 +93,19 @@
             <version>2.4.1</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.thymeleaf</groupId>-->
-<!--            <artifactId>thymeleaf-spring5</artifactId>-->
-<!--            <version>3.0.14.RELEASE</version>-->
-<!--        </dependency>-->
-
+        <!--zipkin-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+            <version>2.2.8.RELEASE</version>
         </dependency>
 
+        <!--sleuth-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+            <version>3.1.2</version>
         </dependency>
-
-
 
     </dependencies>
 <!--    <build>-->
