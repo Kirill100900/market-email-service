@@ -30,7 +30,7 @@ public class test {
                   height="350" border="0" alt="Ссылка"></a></p>
                 </body>
                 """;
-        mailService.sender("ilia@rambler.ru","Privet",body);
+//        mailService.sender("ilia@rambler.ru","Privet",body, "Roma"); // Добавил параметр (имя пользоваетля)
         assertEquals(1, 1);
     }
 }
