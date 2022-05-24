@@ -54,19 +54,19 @@ public class MailService {
                     .getTemplate("welcome-message-ru.ftl");
             String htmlBody = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplate, templateModel);
 
-            sendEmailBy(mailMessageDto.getTo(), mailMessageDto.getSubject(), htmlBody);
+            sendEmailByEmailAndSubjectAndHtmlBody(mailMessageDto.getTo(), mailMessageDto.getSubject(), htmlBody);
         } else {
             Template freemarkerTemplate = freemarkerConfigurer.getConfiguration()
                     .getTemplate("welcome-message-eng.ftl");
             String htmlBody = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplate, templateModel);
 
-            sendEmailBy(mailMessageDto.getTo(), mailMessageDto.getSubject(), htmlBody);
+            sendEmailByEmailAndSubjectAndHtmlBody(mailMessageDto.getTo(), mailMessageDto.getSubject(), htmlBody);
         }
 
 
     }
 
-    private void sendEmailBy(String emailto, String subject, String htmlBody) throws MessagingException {
+    private void sendEmailByEmailAndSubjectAndHtmlBody(String emailto, String subject, String htmlBody) throws MessagingException {
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
