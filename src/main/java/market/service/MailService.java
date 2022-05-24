@@ -2,7 +2,7 @@ package market.service;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import market.model.MailLanguages;
+import market.dto.MailMessageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
@@ -38,33 +39,34 @@ public class MailService {
 //        javaMailSender.send(msg);
 //    }
 
-    public void sendMessageUsingFreemarkerTemplate(
-            String to, String subject, String username, MailLanguages mailLanguages)
+    public void sendMessageUsingFreemarkerTemplate(MailMessageDto mailMessageDto)
             throws IOException, TemplateException, MessagingException {
 
 
         Map<String, Object> templateModel = new HashMap<>();
-        templateModel.put("username", username);
+        templateModel.put("username", mailMessageDto.getUsername());
 
-        if (mailLanguages.getLanguage().contains("RU")) {
+        if (mailMessageDto.getMailLanguages()
+                .getLanguage()
+                .contains("RU")) {
 
             Template freemarkerTemplate = freemarkerConfigurer.getConfiguration()
                     .getTemplate("welcome-message-ru.ftl");
             String htmlBody = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplate, templateModel);
 
-            sender(to, subject, htmlBody);
+            sendEmailBy(mailMessageDto.getTo(), mailMessageDto.getSubject(), htmlBody);
         } else {
             Template freemarkerTemplate = freemarkerConfigurer.getConfiguration()
                     .getTemplate("welcome-message-eng.ftl");
             String htmlBody = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplate, templateModel);
 
-            sender(to, subject, htmlBody);
+            sendEmailBy(mailMessageDto.getTo(), mailMessageDto.getSubject(), htmlBody);
         }
 
 
     }
 
-    private void sender(String emailto, String subject, String htmlBody) throws MessagingException {
+    private void sendEmailBy(String emailto, String subject, String htmlBody) throws MessagingException {
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
