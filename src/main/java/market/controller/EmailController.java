@@ -20,7 +20,7 @@ public class EmailController {
 
     @GetMapping(value = "/email/{user-email}")
     public Mono<ResponseEntity> sendEmail(@PathVariable("user-email") String email) {
-        MailMessageDto mailMessageDto = new MailMessageDto("", email, "", MailLanguages.RU);
+        MailMessageDto mailMessageDto = new MailMessageDto(email, "", "", MailLanguages.RU);
         return Mono.fromCallable(() -> {
                     try {
                         mailService.sendMessageUsingFreemarkerTemplate(mailMessageDto);
