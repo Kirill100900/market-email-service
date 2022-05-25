@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import reactor.core.publisher.Mono;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -42,7 +43,6 @@ public class MailService {
     public void sendMessageUsingFreemarkerTemplate(MailMessageDto mailMessageDto)
             throws IOException, TemplateException, MessagingException {
 
-
         Map<String, Object> templateModel = new HashMap<>();
         templateModel.put("username", mailMessageDto.getUsername());
 
@@ -67,7 +67,6 @@ public class MailService {
     }
 
     private void sendEmailByEmailAndSubjectAndHtmlBody(String emailto, String subject, String htmlBody) throws MessagingException {
-
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
         helper.setTo(emailto);
