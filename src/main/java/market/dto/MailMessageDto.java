@@ -8,6 +8,13 @@ public class MailMessageDto {
     private String subject;
     private MailLanguages mailLanguages;
 
+    public MailMessageDto(String to, String username, String subject, MailLanguages mailLanguages) {
+        this.to = to;
+        this.username = username;
+        this.subject = subject;
+        this.mailLanguages = mailLanguages;
+    }
+
     public String getTo() {
         return to;
     }

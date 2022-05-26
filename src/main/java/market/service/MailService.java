@@ -42,7 +42,6 @@ public class MailService {
     public void sendMessageUsingFreemarkerTemplate(MailMessageDto mailMessageDto)
             throws IOException, TemplateException, MessagingException {
 
-
         Map<String, Object> templateModel = new HashMap<>();
         templateModel.put("username", mailMessageDto.getUsername());
 
@@ -67,7 +66,6 @@ public class MailService {
     }
 
     private void sendEmailByEmailAndSubjectAndHtmlBody(String emailto, String subject, String htmlBody) throws MessagingException {
-
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
         helper.setTo(emailto);
