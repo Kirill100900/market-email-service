@@ -18,7 +18,7 @@ public class EmailController {
         this.mailService = mailService;
     }
 
-    @GetMapping(value = "/email/{user-email/{username}")
+    @GetMapping(value = "/email/{user-email}/{username}")
     public Mono<ResponseEntity> sendEmail(@PathVariable("user-email") String email,
                                           @PathVariable("username") String username) {
         MailMessageDto mailMessageDto = new MailMessageDto(email, username, "", MailLanguages.RU);
