@@ -74,5 +74,18 @@ public class MailService {
         javaMailSender.send(message);
         System.out.println("message sent");
     }
+
+    public void sendBirthdayMessage (String username, String email) throws IOException, TemplateException, MessagingException {
+        Map <String, Object> templateModel = new HashMap<>();
+
+        templateModel.put("username", username);
+
+        Template template = freemarkerConfigurer.getConfiguration().getTemplate("birthday-message.ftl");
+        String htmlbody = FreeMarkerTemplateUtils.processTemplateIntoString(template, templateModel);
+        String subject = "Birthday";
+
+        sendEmailByEmailAndSubjectAndHtmlBody(email, subject, htmlbody);
+    }
+
 }
 
