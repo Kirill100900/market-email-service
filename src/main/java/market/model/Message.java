@@ -35,5 +35,6 @@ public class Message {
                 "message='" + message + '\'' +
                 ", number=" + number +
                 '}';
+
     }
 }
